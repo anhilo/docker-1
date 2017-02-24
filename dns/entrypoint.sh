@@ -41,11 +41,8 @@ harden-dnssec-stripped: yes
 cache-min-ttl: 3600
 cache-max-ttl: 86400
 prefetch: yes
-prefetch-key: yes""" > /etc/unbound/unbound.conf
+prefetch-key: yes
+local-zone: \"${DNS_NAME}\" redirect
+local-data: \"${DNS_NAME} 3600 IN A ${NS_IP}\"""" > /etc/unbound/unbound.conf
 
-local-data: "rivallu.io 3600 IN A 192.168.1.54"
-
-
-echo """ local-zone: \"${DNS_NAME}\" redirect""" >> /etc/unbound/unbound.conf
-echo """ local-data: \"${DNS_NAME} 3600 IN A ${NS_IP}\" """ >> /etc/unbound/unbound.conf
 exec /usr/sbin/unbound -c /etc/unbound/unbound.conf -d -v
