@@ -1,18 +1,57 @@
-FROM ubuntu:latest
-MAINTAINER lucas rival
 
+#
+# Dockerfile for hydra
+#
+
+FROM alpine:latest
+MAINTAINER lucas rival
 
 WORKDIR /root/
 
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y  gcc make git
-RUN apt-get install -y libssl-dev libssh-dev libidn11-dev libpcre3-dev \
-                libmysqlclient-dev libpq-dev libsvn-dev \
-                firebird2.1-dev
-RUN git clone https://github.com/vanhauser-thc/thc-hydra
+RUN apk add -U apr-dev \
+  apr-util-dev \
+  bash \
+  build-base \
+  curl \
+  git \
+  jq \
+  libidn \
+  libidn-dev \
+  libpq \
+  libssh \
+  libssh-dev \
+  mariadb-dev \
+  mariadb-libs \
+  ncurses \
+  ncurses-dev \
+  openssl \
+  openssl-dev \
+  parallel \
+  pcre \
+  pcre-dev \
+  postgresql-dev \
+  subversion-dev \
+  subversion-libs \
+  && echo 'will cite' | parallel --bibtex
+
+RUN git clone https://github.com/vanhauser-thc/thc-hydra.git
 WORKDIR /root/thc-hydra
-RUN ./configure --disable-xhydra -DWITH_SSH1=On
-RUN make && make install
+RUN ./configure --disable-xhydra
+RUN  make && make install  && cd .. \
+  && rm -rf src
+RUN  apk del --purge apr-dev \
+          apr-util-dev \
+          build-base \
+          libidn-dev \
+          libssh-dev \
+          ncurses-dev \
+          mariadb-dev \
+          openssl-dev \
+          pcre-dev \
+          postgresql-dev \
+          subversion-dev
+
+RUN rm -rf /var/cache/apk/*
 
 #WORKDIR /root/wordlists
 COPY rockyou.txt .
