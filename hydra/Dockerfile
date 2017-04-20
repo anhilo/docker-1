@@ -3,7 +3,7 @@
 # Dockerfile for hydra
 #
 
-FROM alpine:latest
+FROM alpine:edge
 MAINTAINER lucas rival
 
 WORKDIR /root/
@@ -14,25 +14,29 @@ RUN apk add -U apr-dev \
   build-base \
   curl \
   git \
-  jq \
-  libidn \
+  jq
+
+RUN apk add -U  libidn \
   libidn-dev \
   libpq \
   libssh \
   libssh-dev \
   mariadb-dev \
+  mariadb-client-libs \
   mariadb-libs \
   ncurses \
-  ncurses-dev \
-  openssl \
-  openssl-dev \
-  parallel \
-  pcre \
-  pcre-dev \
-  postgresql-dev \
-  subversion-dev \
-  subversion-libs \
-  && echo 'will cite' | parallel --bibtex
+  ncurses-dev
+  RUN apk add -U parallel \
+    pcre \
+    pcre-dev \
+    postgresql-dev \
+    subversion-dev \
+    subversion-libs \
+    && echo 'will cite' | parallel --bibtex
+
+RUN apk add -U libressl \
+  libressl-dev
+
 
 RUN git clone https://github.com/vanhauser-thc/thc-hydra.git
 WORKDIR /root/thc-hydra

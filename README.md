@@ -14,7 +14,7 @@ Simple unbound DNS based on Alpine. Can manage a local zone for dev test
 
 
 ## Hydra
-Simple hydra bruteforce tool based on ubuntu:trusty
+Simple hydra bruteforce tool based on alpine
 you can mount your wordlist directory in /root/wordlists
 
 ```
