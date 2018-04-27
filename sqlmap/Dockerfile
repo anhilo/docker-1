@@ -1,10 +1,10 @@
 FROM python:2.7
-MAINTAINER Lucas Rival <lucas.rival@gmail.com
+MAINTAINER Lucas Rival <lucas.rival@gmail.com>
 
-ENV VERSION 1.1
+ENV VERSION 1.2
 
 RUN git clone -v  https://github.com/sqlmapproject/sqlmap.git \
-	&& cd sqlmap \	
+	&& cd sqlmap \
 	&& git checkout tags/${VERSION}
 
 WORKDIR /sqlmap
