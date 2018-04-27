@@ -3,6 +3,6 @@
 
 FROM		alpine:latest
 MAINTAINER      Lucas Rival <lucas.rival@gmail.com>
-ENV		VERSION=1.2_rc4-r3
+ENV		VERSION=1.2_rc4-r4
 RUN		apk add --no-cache aircrack-ng=$VERSION
 CMD	aircrack-ng
