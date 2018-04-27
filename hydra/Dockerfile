@@ -4,16 +4,15 @@
 #
 
 FROM alpine:edge
-MAINTAINER lucas rival
+MAINTAINER Lucas Rival <lucas.rival@gmail.com>
 
 WORKDIR /root/
 
 RUN apk add -U apr-dev \
   apr-util-dev \
-  bash \
   build-base \
-  curl \
   git \
+  wget \
   jq
 
 RUN apk add -U  libidn \
@@ -26,13 +25,12 @@ RUN apk add -U  libidn \
   mariadb-libs \
   ncurses \
   ncurses-dev
-  RUN apk add -U parallel \
-    pcre \
+
+RUN apk add -U  pcre \
     pcre-dev \
     postgresql-dev \
     subversion-dev \
-    subversion-libs \
-    && echo 'will cite' | parallel --bibtex
+    subversion-libs
 
 RUN apk add -U libressl \
   libressl-dev
@@ -49,15 +47,18 @@ RUN  apk del --purge apr-dev \
           libidn-dev \
           libssh-dev \
           ncurses-dev \
+          libressl-dev \
           mariadb-dev \
           openssl-dev \
           pcre-dev \
           postgresql-dev \
           subversion-dev
 
+RUN apk add -U parallel   && parallel --will-cite
 RUN rm -rf /var/cache/apk/*
 
 #WORKDIR /root/wordlists
-COPY rockyou.txt .
+RUN wget http://downloads.skullsecurity.org/passwords/rockyou.txt.bz2
+RUN bzip2 -d rockyou.txt.bz2
 
-#ENTRYPOINT ["./hydra"]
+ENTRYPOINT	["hydra"]
