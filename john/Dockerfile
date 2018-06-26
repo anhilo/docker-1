@@ -1,8 +1,9 @@
-FROM		alpine:edge
+FROM		alpine:latest
 MAINTAINER	Lucas Rival <lucas.rival@gmail.com>
 
-ENV		JOHN_VERSION 1.8.0-r6
+ENV		JOHN_VERSION 1.8.0-r8
 RUN		mkdir -p /usr/share/john 
-RUN		apk --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing add john=${JOHN_VERSION}
+RUN 		apk update --no-cache
+RUN		apk --no-cache  add john=${JOHN_VERSION}
 
 ENTRYPOINT	["john"]
