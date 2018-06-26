@@ -1,13 +1,9 @@
-
-#
-# Dockerfile for hydra
-#
-
-FROM alpine:edge
+FROM alpine:latest
 MAINTAINER Lucas Rival <lucas.rival@gmail.com>
 
 WORKDIR /root/
 
+RUN apk update --no-cache
 RUN apk add -U apr-dev \
   apr-util-dev \
   build-base \
@@ -61,4 +57,4 @@ RUN rm -rf /var/cache/apk/*
 RUN wget http://downloads.skullsecurity.org/passwords/rockyou.txt.bz2
 RUN bzip2 -d rockyou.txt.bz2
 
-ENTRYPOINT	["hydra"]
+ENTRYPOINT ["hydra"]
