@@ -3,7 +3,7 @@ MAINTAINER lucas rival
 
 
 RUN apk add  --no-cache unbound
-RUN apk add  --no-cache dns
+RUN apk add  --no-cache curl
 
 ENV DNS_NAME foo.bar
 ENV Local_IP 192.168.1.0
