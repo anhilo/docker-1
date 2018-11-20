@@ -35,6 +35,7 @@ unwanted-reply-threshold: 10000
 do-not-query-localhost: yes
 val-clean-additional: yes
 ##je bloque cetaines pubs
+include: /etc/unbound/ads.conf
 use-syslog: yes
 logfile: /var/log/unbound.log
 harden-dnssec-stripped: yes
