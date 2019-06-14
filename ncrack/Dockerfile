@@ -10,8 +10,8 @@ RUN apt-get install -y libssl-dev libssh-dev libidn11-dev libpcre3-dev \
                 libgtk2.0-dev libmysqlclient-dev libpq-dev libsvn-dev \
                 firebird2.1-dev
 RUN wget https://nmap.org/ncrack/dist/ncrack-0.5.tar.gz
-RUN tar zfx ncrack-0.5.tar.gz
-RUN mv ncrack-0.5 ncrack
+RUN tar zfx ncrack-0.6.tar.gz
+RUN mv ncrack-0.6 ncrack
 WORKDIR /root/ncrack
 RUN ./configure
 RUN make && make install
