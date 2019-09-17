@@ -17,7 +17,6 @@ RUN apk add -U  libidn \
   libssh \
   libssh-dev \
   mariadb-dev \
-  mariadb-client-libs \
   mariadb-libs \
   ncurses \
   ncurses-dev
